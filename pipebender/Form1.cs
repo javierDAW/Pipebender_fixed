@@ -267,7 +267,7 @@ namespace pipebender
             }
         }
 
-        private void changeWholeFlow(int id, MouseEventArgs e)
+        /*private void changeWholeFlow(int id, MouseEventArgs e)
         {
             Component c = ct.CompList.Find(x => x.Id == id);
 
@@ -277,7 +277,7 @@ namespace pipebender
             }
 
             mapBox.Refresh();
-        }
+        }*/
 
 
         private void button1_Click(object sender, EventArgs e)
@@ -384,6 +384,13 @@ namespace pipebender
             {
                 sw.Close();
             }
+        }
+
+        private void buttonClean_Click(object sender, EventArgs e)
+        {
+            ct.CompList.Clear();
+            ct.PipeList.Clear();
+            mapBox.Refresh();
         }
 
         private void cleanValues()

@@ -191,6 +191,7 @@
             this.buttonClean.TabIndex = 11;
             this.buttonClean.Text = "Clean";
             this.buttonClean.UseVisualStyleBackColor = true;
+            this.buttonClean.Click += new System.EventHandler(this.buttonClean_Click);
             // 
             // buttonSave
             // 
