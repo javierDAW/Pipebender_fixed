@@ -111,5 +111,22 @@ namespace pipebender
             String resume = EType+" "+id+" "+coord.X+" "+coord.Y+" "+flow+" "+isOutAvailable;
             return resume;
         }
+
+        public override void removeFlowItems(ref List<Component> compList, ref List<Pipe> pipeList)
+        {
+            Pipe p1 = null;
+            p1 = pipeList.Find(x => x.ID == isOutAvailable);
+
+            if (p1 != null)
+            {
+                Component c = compList.Find(x => x.Id == p1.EndComponentID);
+
+                pipeList.Remove(p1);
+
+                c.removeFlowItems(ref compList, ref pipeList);
+            }
+            
+            compList.Remove(this);
+        }
     }
 }

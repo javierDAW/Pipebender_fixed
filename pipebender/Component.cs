@@ -102,6 +102,8 @@ namespace pipebender
 
         public abstract void recalcFlow(ref List<Component> compList, ref List<Pipe> pipeList);
 
+        public abstract void removeFlowItems(ref List<Component> compList, ref List<Pipe> pipeList);
+
         public abstract String giveMeYourValuesInText();
     }
 }

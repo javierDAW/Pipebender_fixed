@@ -411,7 +411,7 @@ namespace pipebender
 
                 if (recAux.Contains(e))
                 {
-                    compList.RemoveAt(i);
+                    compList[i].removeFlowItems(ref compList, ref pipeList);
                 }
             }
         }

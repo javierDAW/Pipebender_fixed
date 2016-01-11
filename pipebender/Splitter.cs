@@ -173,6 +173,8 @@ namespace pipebender
 
         override public abstract void recalcFlow(ref List<Component> compList, ref List<Pipe> pipeList);
 
+        override public abstract void removeFlowItems(ref List<Component> compList, ref List<Pipe> pipeList);
+
         override public abstract String giveMeYourValuesInText();
 
         override public void FlowIn(int typeOfConnection, int flow)
