@@ -18,6 +18,7 @@ namespace pipebender
         private int maxFlow;
         private int currentFlow;
         private int id;
+        private bool removing = false;
 
         public Pipe(int StartComponentID, int EndComponentID, int startType, int endType, List<Point> pointOfPipe, int id, int maxFlow)
         {
@@ -50,6 +51,19 @@ namespace pipebender
             set
             {
                 startComponentID = value;
+            }
+        }
+
+        public bool Removing
+        {
+            get
+            {
+                return removing;
+            }
+
+            set
+            {
+                removing = value;
             }
         }
 

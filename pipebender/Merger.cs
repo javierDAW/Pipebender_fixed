@@ -204,6 +204,13 @@ namespace pipebender
                     c.recalcFlow(ref compList, ref pipeList);
                 }
             }
+
+            if (p1.Removing == true)
+                isIn1Available = -1;
+            else if (p2.Removing == true)
+                isIn2Available = -1;
+            else if (p3.Removing == true)
+                isOutAvailable = -1;
         }
 
         override public void FlowIn(int typeOfConnection, int flow)
@@ -243,29 +250,38 @@ namespace pipebender
 
             if(p1 != null)
             {
+                p1.CurrentFlow = 0;
+                p1.Removing = true;
+
                 Component c = compList.Find(x => x.Id == p1.StartComponentID);
 
-                pipeList.Remove(p1);
+                c.recalcFlow(ref compList, ref pipeList);
 
-                c.removeFlowItems(ref compList, ref pipeList);
+                pipeList.Remove(p1);
             }
 
             if (p2 != null)
             {
+                p2.CurrentFlow = 0;
+                p2.Removing = true;
+
                 Component c = compList.Find(x => x.Id == p2.StartComponentID);
 
-                pipeList.Remove(p2);
+                c.recalcFlow(ref compList, ref pipeList);
 
-                c.removeFlowItems(ref compList, ref pipeList);
+                pipeList.Remove(p2);
             }
 
             if (p3 != null)
             {
+                p3.CurrentFlow = 0;
+                p3.Removing = true;
+
                 Component c = compList.Find(x => x.Id == p3.EndComponentID);
 
-                pipeList.Remove(p3);
+                c.recalcFlow(ref compList, ref pipeList);
 
-                c.removeFlowItems(ref compList, ref pipeList);
+                pipeList.Remove(p3);
             }
 
             compList.Remove(this);

@@ -76,23 +76,33 @@ namespace pipebender
         override public void recalcFlow(ref List<Component> compList, ref List<Pipe> pipeList) {
             if (isOutAvailable != -1)
             {
-                Pipe p = pipeList.Find(x => x.ID == isOutAvailable);
+                Pipe p = null;
+                p = pipeList.Find(x => x.ID == isOutAvailable);
 
-                if (p.MaxFlow > flow && p.CurrentFlow != flow)
+                if (p != null)
                 {
-                    p.CurrentFlow = flow;
 
-                    Component c = compList.Find(x => x.Id == p.EndComponentID);
+                    if (p.MaxFlow > flow && p.CurrentFlow != flow)
+                    {
+                        p.CurrentFlow = flow;
 
-                    c.recalcFlow(ref compList, ref pipeList);
-                }
-                else if (flow >= p.MaxFlow && p.CurrentFlow != p.MaxFlow)
-                {
-                    p.CurrentFlow = p.MaxFlow;
+                        Component c = compList.Find(x => x.Id == p.EndComponentID);
 
-                    Component c = compList.Find(x => x.Id == p.EndComponentID);
+                        c.recalcFlow(ref compList, ref pipeList);
+                    }
+                    else if (flow >= p.MaxFlow && p.CurrentFlow != p.MaxFlow)
+                    {
+                        p.CurrentFlow = p.MaxFlow;
 
-                    c.recalcFlow(ref compList, ref pipeList);
+                        Component c = compList.Find(x => x.Id == p.EndComponentID);
+
+                        c.recalcFlow(ref compList, ref pipeList);
+                    }
+
+                    if (p.Removing == true)
+                    {
+                        isOutAvailable = -1;
+                    }
                 }
             }
         }
@@ -119,11 +129,14 @@ namespace pipebender
 
             if (p1 != null)
             {
+                p1.CurrentFlow = 0;
+                p1.Removing = true;
+
                 Component c = compList.Find(x => x.Id == p1.EndComponentID);
 
-                pipeList.Remove(p1);
+                c.recalcFlow(ref compList, ref pipeList);
 
-                c.removeFlowItems(ref compList, ref pipeList);
+                pipeList.Remove(p1);
             }
             
             compList.Remove(this);

@@ -67,7 +67,18 @@ namespace pipebender
             MessageBox.Show("Nothing can be configured here");
         }
 
-        override public void recalcFlow(ref List<Component> compList, ref List<Pipe> pipeList) { }
+        override public void recalcFlow(ref List<Component> compList, ref List<Pipe> pipeList) {
+            Pipe p1 = null;
+            p1 = pipeList.Find(x => x.ID == isInAvailable);
+
+            if (p1 != null)
+            {
+                quantity = 0;
+
+                if (p1.Removing == true)
+                    isInAvailable = -1;
+            }
+        }
 
         override public void FlowIn(int typeOfConnection, int flow)
         {
@@ -92,11 +103,11 @@ namespace pipebender
 
             if (p1 != null)
             {
+                p1.Removing = true;
+
                 Component c = compList.Find(x => x.Id == p1.StartComponentID);
 
                 pipeList.Remove(p1);
-
-                c.removeFlowItems(ref compList, ref pipeList);
             }
 
             compList.Remove(this);
