@@ -71,11 +71,12 @@ namespace pipebender
 
         override public void FlowIn(int typeOfConnection, int flow)
         {
+            quantity = flow;
         }
 
         override public int FlowOut(int typeOfConnection)
         {
-            return 0;
+            return quantity;
         }
 
         override public String giveMeYourValuesInText()

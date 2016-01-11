@@ -99,7 +99,7 @@ namespace pipebender
                     {
                         case (int)EnumTypes.Sink:
                             // Creating the new object (Sick in this case) - The (int)EnumTypes.Sink uses the enum created so you don't need to remember which number is it each type.
-                            c1 = new Sink(id, e.Location, 20, (int)EnumTypes.Sink);
+                            c1 = new Sink(id, e.Location, 0, (int)EnumTypes.Sink);
                             break;
 
                         case (int)EnumTypes.Pump:
@@ -179,14 +179,16 @@ namespace pipebender
                                                     // Inserting the flow into the different components
                                                     currentFlow = ct.FlowOut(idStart, typeOfConnectionStart, pipeId);
                                                     //MessageBox.Show(currentFlow.ToString());
-                                                    if (currentFlow >= p.MaxFlow)
+                                                    /*if (currentFlow >= p.MaxFlow)
                                                     {
                                                         p.CurrentFlow = p.MaxFlow;
                                                     }
                                                     else
                                                     {
                                                         p.CurrentFlow = currentFlow;
-                                                    }
+                                                    }*/
+
+                                                    p.CurrentFlow = currentFlow;
 
                                                     ct.FlowIn(idEnd, typeOfConnectionEnd, pipeId, p.CurrentFlow);
                                                     // End

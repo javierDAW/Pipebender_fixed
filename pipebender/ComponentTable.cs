@@ -113,17 +113,27 @@ namespace pipebender
             {
                 // Draw the img from the list depending on the Etype on the coordinates stored in the object.
                 gr.DrawImage(iL.Images[c.EType], c.Coord.X, c.Coord.Y);
+                string drawString = null;
+                Font drawFont = new Font("Arial", 16);
+                SolidBrush drawBrush = new SolidBrush(Color.Orange);
 
                 if (c is Pump || c is Merger)
                 {
-                    string drawString = c.FlowOut((int)TypeOfConnection.MiddleOutput).ToString();
-                    Font drawFont = new Font(
-                        "Arial", 16);
-                    SolidBrush drawBrush = new SolidBrush(Color.Orange);
-                    gr.DrawString(drawString, drawFont, drawBrush, c.Coord.X, c.Coord.Y);
-                    drawFont.Dispose();
-                    drawBrush.Dispose();
+                    drawString = c.FlowOut((int)TypeOfConnection.MiddleOutput).ToString();
+                }else if(c is Splitter)
+                {
+                    Splitter z = (Splitter)c;
+                    drawString = z.GetFlowIn.ToString();
                 }
+                else if(c is Sink)
+                {
+                    drawString = c.FlowOut((int)TypeOfConnection.MiddleInput).ToString();
+                }
+
+                gr.DrawString(drawString, drawFont, drawBrush, c.Coord.X, c.Coord.Y);
+
+                drawFont.Dispose();
+                drawBrush.Dispose();
             }
 
 
